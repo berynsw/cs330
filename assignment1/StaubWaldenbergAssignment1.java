@@ -59,12 +59,23 @@ public class StaubWaldenbergAssignment1 {
         System.out.println("Total crazy days = " + totalCrazyDays);
         if(!crazyDays.isEmpty())
             System.out.println("The craziest day:\t" + craziestDay + "\t" + craziestDayPercent);
-
+        System.out.print("\n");
 
     }
 
 
+    static void crazyDayCheck(String[] day){
 
+        if(calcPercentChange(day) >= 15.00){
+            crazyDays.add(day);
+            totalCrazyDays ++;
+            //update craziest day
+            if(calcPercentChange(day) > craziestDayPercent) {
+                craziestDayPercent = calcPercentChange(day);
+                craziestDay = day[1];
+            }
+        }
+    }
 
 
 
@@ -101,45 +112,31 @@ public class StaubWaldenbergAssignment1 {
         System.out.println("Processing " + currentCompany + "\n==================");
 
 
-        while(br.ready())
+        while(day1 != null)
         {
 
-            //day1 company equals day 2 company
-            if(day2[0].equals(currentCompany)) {
+            crazyDayCheck(day1);
+            System.out.println(day1[1]);
 
-                //crazy day check
-                if(calcPercentChange(day1) >= 15.00){
-                    crazyDays.add(day1);
-                    totalCrazyDays ++;
-                    //update craziest day
-                    if(calcPercentChange(day1) > craziestDayPercent) {
-                        craziestDayPercent = calcPercentChange(day1);
-                        craziestDay = day1[1];
-                    }
-                }
-            }
-            else{
-                //print stats for current company
+            if(day2 == null){
                 printStats();
-
-                System.out.print("\n");
-
-                //switch company
+                clearStats();
+            }else if(!day2[0].equals(currentCompany)) {
+                printStats();
                 clearStats();
                 currentCompany = day2[0];
-
                 System.out.println("Processing " + currentCompany + "\n==================");
-
             }
 
-
+            //currently stops 2 short of the end
             //increment day 1
             day1 = day2;
             //increment day 2
-            try {
-                day2 = br.readLine().split("\t");
-            }catch(NullPointerException e){}
 
+            if(br.ready())
+                day2 = br.readLine().split("\t");
+            else
+                day2 = null;
         }
 
 
