@@ -4,28 +4,39 @@ import java.util.*;
 public class StaubWaldenbergAssignment1 {
 
 
-    static class Company{
-        public String name;
-        public ArrayList<String[]> crazyDays;
-        public ArrayList<String[]> splits;
-        public int totalCrazyDays;
-        public int totalSplits;
 
-        //constructor for company object
-        Company(String s){
-            this.name = s;
-            this.crazyDays = new ArrayList<String[]>();
-            this.splits = new ArrayList<String[]>();
-            this.totalCrazyDays = 0;
-            this.totalSplits = 0;
-        }
+    //lists to store data about stock market days
+    static String currentCompany;
+    static ArrayList<String[]> crazyDays;
+    static ArrayList<String[]> splits;
+    static int totalCrazyDays;
+    static String craziestDay;
+    static double craziestDayPercent;
+    static int totalSplits;
 
-        String processing(){
-            return "Processing " + this.name + "\n==================";
-        }
+
+    static void initStats(){
+        currentCompany = null;
+        crazyDays = new ArrayList<String[]>();
+        splits = new ArrayList<String[]>();
+        totalCrazyDays = 0;
+        craziestDay = null;
+        craziestDayPercent = 0;
+        totalSplits = 0;
     }
 
-    public static String readline(String string1, String filepath)throws Exception {
+    static void clearStats(){
+        currentCompany = null;
+        crazyDays.clear();
+        splits.clear();
+        totalCrazyDays = 0;
+        craziestDay = null;
+        craziestDayPercent = 0;
+        totalSplits = 0;
+    }
+
+
+    static String readline(String string1, String filepath)throws Exception {
         File file1 = new File(filepath);
         BufferedReader br = new BufferedReader(new FileReader(file1));
         if(br.ready())
@@ -33,15 +44,26 @@ public class StaubWaldenbergAssignment1 {
         return null;
     }
 
-    public static double calcPercentChange(String[] day){
+    static double calcPercentChange(String[] day){
         double high = Double.parseDouble(day[3]);
         double low = Double.parseDouble(day[4]);
         return (high-low)/high*100;
     }
 
-    public static void printCrazyDay(String[] day){
-        System.out.println("Crazy day:\t" + day[1] + "\t" + calcPercentChange(day));
+    static void printStats(){
+
+        if(!crazyDays.isEmpty()) {
+            for (String[] day : crazyDays)
+                System.out.println("Crazy day:\t" + day[1] + "\t" + calcPercentChange(day));
+        }
+        System.out.println("Total crazy days = " + totalCrazyDays);
+        if(!crazyDays.isEmpty())
+            System.out.println("The craziest day:\t" + craziestDay + "\t" + craziestDayPercent);
+
+
     }
+
+
 
 
 
@@ -51,61 +73,62 @@ public class StaubWaldenbergAssignment1 {
     {
 
         //set standard out to write to file
-
+        /*
         PrintStream tofile = new PrintStream(new File("output.txt"));
         PrintStream console = System.out;
         System.setOut(tofile);
+        */
 
 
         //setup to read file
         //pathname may change for grading? change path before turning in
-        File file1 = new File("/home/staubwb/IdeaProjects/main/school/cs330/assignment1/Stockmarket-1990-2015.txt");
+        File file1 = new File("Stockmarket-1990-2015.txt");
         BufferedReader br = new BufferedReader(new FileReader(file1));
 
 
         //read day 1
         String[] day1 = br.readLine().split("\t");
 
+        //init storage for first company
+        initStats();
+        currentCompany = day1[0];
 
-        //create struct for first company
-        Company company1 = new Company(day1[0]);
-
-
-        System.out.println("Processing " + company1.name + "\n==================");
-
-
+        //read day 2
+        String[] day2 = br.readLine().split("\t");
 
 
 
+        System.out.println("Processing " + currentCompany + "\n==================");
 
 
         while(br.ready())
         {
-            //read day 2
-            String[] day2 = br.readLine().split("\t");
 
             //day1 company equals day 2 company
-            if(day2[0].equals(day1[0])) {
-
+            if(day2[0].equals(currentCompany)) {
 
                 //crazy day check
                 if(calcPercentChange(day1) >= 15.00){
-                    company1.crazyDays.add(day1);
-
+                    crazyDays.add(day1);
+                    totalCrazyDays ++;
+                    //update craziest day
+                    if(calcPercentChange(day1) > craziestDayPercent) {
+                        craziestDayPercent = calcPercentChange(day1);
+                        craziestDay = day1[1];
+                    }
                 }
             }
             else{
-
-                //print crazy days for current company
-                for(String[] day : company1.crazyDays)
-                    printCrazyDay(day);
+                //print stats for current company
+                printStats();
 
                 System.out.print("\n");
 
                 //switch company
-                company1 = new Company(day2[0]);
+                clearStats();
+                currentCompany = day2[0];
 
-                System.out.println("Processing " + company1.name + "\n==================");
+                System.out.println("Processing " + currentCompany + "\n==================");
 
             }
 
