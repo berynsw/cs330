@@ -1,0 +1,34 @@
+Processing AAPL
+======================
+Crazy day: 8/24/2015	15.44
+Crazy day: 5/6/2010	22.85
+Crazy day: 10/17/2008	15.83
+Crazy day: 10/10/2008	15.00
+Crazy day: 9/29/2008	15.95
+Crazy day: 1/6/1998	26.25
+Crazy day: 1/2/1998	16.92
+Total crazy days = 7
+The craziest day: 1/6/1998	26.25
+
+2:1 split on 2/25/2005	88.99 --> 44.68
+2:1 split on 6/20/2000	101.25 --> 50.50
+Total number of splits: 2
+
+Processing GOOG
+======================
+Total crazy days = 0
+
+Total number of splits: 0
+
+Processing MSFT
+======================
+Total crazy days = 0
+
+2:1 split on 2/14/2003	48.30 --> 24.62
+2:1 split on 3/26/1999	178.13 --> 90.13
+2:1 split on 12/6/1996	152.88 --> 78.38
+2:1 split on 5/20/1994	97.75 --> 49.00
+3:2 split on 6/12/1992	112.50 --> 75.00
+3:2 split on 6/26/1991	100.75 --> 67.75
+2:1 split on 4/12/1990	120.75 --> 61.00
+Total number of splits: 7
