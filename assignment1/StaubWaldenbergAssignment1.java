@@ -1,4 +1,5 @@
 import java.io.*;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class StaubWaldenbergAssignment1 {
@@ -86,25 +87,26 @@ public class StaubWaldenbergAssignment1 {
             splitAdd(day1, day2, "3:2");
     }
 
-    //rounds double to two decimal places
-    static double roundTwoD(double num){
-        return Math.floor(num * 100) / 100;
-    }
+
 
     //prints all stats for current company
     static void printStats(){
 
+
+        //crazy day stats
         if(!crazyDays.isEmpty()) {
             for (String[] day : crazyDays)
-                System.out.println("Crazy day: " + day[1] + "\t" + roundTwoD(calcPercentChange(day)));
+                System.out.println("Crazy day: " + day[1] + "\t" + String.format("%.2f", calcPercentChange(day)));
         }
         System.out.println("Total crazy days = " + totalCrazyDays);
         if(!crazyDays.isEmpty())
-            System.out.println("The craziest day:\t" + craziestDay + "\t" + roundTwoD(craziestDayPercent));
+            System.out.println("The craziest day:\t" + craziestDay + "\t" + String.format("%.2f", craziestDayPercent));
         System.out.println();
+
+        //split stats
         if(!splits.isEmpty()) {
             for (String[] day : splits)
-                System.out.println(day[0] + " split on: " + day[1] + "\t " + day[2] + " --> " + day[3]);
+                System.out.println(day[0] + " split on: " + day[1] + "\t " + String.format("%.2f", Double.parseDouble(day[2])) + " --> " + String.format("%.2f", Double.parseDouble(day[3])));
         }
         System.out.println("Total number of splits: " + totalSplits);
         System.out.println("\n");
@@ -116,11 +118,13 @@ public class StaubWaldenbergAssignment1 {
     public static void main(String[] args)throws Exception
     {
 
+
+        /*
         //set standard out to write to file
         PrintStream tofile = new PrintStream(new File("output.txt"));
         PrintStream console = System.out;
         System.setOut(tofile);
-
+        */
 
 
         //setup to read file
