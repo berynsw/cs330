@@ -1,0 +1,10 @@
+Beryn Staub-Waldenberg cs330 Assignment1 Fall 2019
+
+My program does compile and run correctly. I'm not aware of any obvious parts of my program that aren't working. However, I'm sure some things could be done more efficiently. I have individual crazy days and splits stored as string arrays which means I have to convert values within them from Strings to Doubles a couple of times. Parsing and converting a given number once (for example the percent difference of the high and low stock price on a given day) could be stored as a double after it's calculated initially instead of being left as a string. However, this would mean creating an additional structure to store the value returned by calcPercentChange on a given day. It seems that there is sometimes a trade off between space complexity and time complexity in a situation like this. I think I spent about 15 hours on this assignment.
+
+Expected Score
+program gives correct output: 14/14
+good design and style: 2/2
+write up is complete: 2/2
+output format correct: 1/1
+filename format correct: 1/1

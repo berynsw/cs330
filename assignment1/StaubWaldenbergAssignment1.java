@@ -1,5 +1,4 @@
 import java.io.*;
-import java.text.DecimalFormat;
 import java.util.*;
 
 public class StaubWaldenbergAssignment1 {
@@ -109,7 +108,7 @@ public class StaubWaldenbergAssignment1 {
                 System.out.println(day[0] + " split on: " + day[1] + "\t " + String.format("%.2f", Double.parseDouble(day[2])) + " --> " + String.format("%.2f", Double.parseDouble(day[3])));
         }
         System.out.println("Total number of splits: " + totalSplits);
-        System.out.println("\n");
+        System.out.println();
     }
 
 
