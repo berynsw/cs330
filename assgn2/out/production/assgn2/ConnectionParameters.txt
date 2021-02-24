@@ -1,3 +1,0 @@
-dburl=jdbc:mysql://mysql.cs.wwu.edu/johnson330
-user=staubwb
-password=~8{QNfvkP=`J
